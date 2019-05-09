@@ -11,16 +11,15 @@ COPY --from=base /usr/bin/fwatchdog /usr/bin/
 RUN cpanm Carton
 
 RUN useradd -m app && usermod -G app app
+WORKDIR /home/app/
 
 COPY cpanfile .
-COPY main.pl .
 RUN carton install
-
+COPY main.pl .
 COPY function function
 
 RUN chown app:app -R /home/app
 USER app
-WORKDIR /home/app/
 
 ENV fprocess="carton exec perl main.pl"
 
