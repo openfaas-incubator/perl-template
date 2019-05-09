@@ -1,0 +1,2 @@
+language: perl
+fprocess: carton exec perl main.pl

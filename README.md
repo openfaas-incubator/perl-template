@@ -1,10 +1,10 @@
-perl-template
---
+# OpenFaas Perl template
 
-This is a template for using Perl with OpenFaaS
+This repository contains perl language template for OpenFaas.
 
+## Trying the template
+
+```bash
+faas template pull https://github.com/openfaas-incubator/perl-template
+faas new --lang perl <function-name>
 ```
-faas-cli template pull https://github.com/openfaas-incubator/perl-template
-faas-cli new --lang perl <fn-name>
-```
-
