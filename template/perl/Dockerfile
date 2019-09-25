@@ -1,13 +1,10 @@
-FROM alpine:3.8 as base
+FROM openfaas/classic-watchdog:0.18.0 as watchdog
 
-RUN apk --no-cache add curl \
-    && echo "Pulling watchdog binary from Github." \
-    && curl -sSL https://github.com/openfaas/faas/releases/download/0.13.0/fwatchdog > /usr/bin/fwatchdog \
-    && chmod +x /usr/bin/fwatchdog
+FROM perl:5-slim
 
-FROM perl:5.28.2-slim
+COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
+RUN chmod +x /usr/bin/fwatchdog
 
-COPY --from=base /usr/bin/fwatchdog /usr/bin/
 RUN cpanm Carton
 
 RUN useradd -m app && usermod -G app app
